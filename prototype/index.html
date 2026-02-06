@@ -87,6 +87,31 @@
             </div>
           </div>
 
+          <div class="panel">
+            <div class="panel-title">Command</div>
+            <div class="panel-body">
+              <div class="hint" style="margin-bottom:10px">
+                連線到你的 Lazy Office Server（本機/遠端）後，才能真的派工。
+              </div>
+              <label class="field">
+                <div class="label">API Base URL</div>
+                <input id="apiBase" placeholder="https://your-domain.example (or http://127.0.0.1:8787)" />
+              </label>
+              <div class="row">
+                <button class="btn" id="saveApi">Save</button>
+                <button class="btn ghost" id="testApi">Test</button>
+              </div>
+              <label class="field" style="margin-top:10px">
+                <div class="label">指令（會送給選取的 agent）</div>
+                <textarea id="cmdText" rows="4" placeholder="例如：幫我整理今天 AI 新聞 10 則（繁中）"></textarea>
+              </label>
+              <div class="row">
+                <button class="btn primary" id="sendCmd">Send</button>
+              </div>
+              <div class="hint" id="cmdHint" style="margin-top:10px"></div>
+            </div>
+          </div>
+
           <div class="panel log">
             <div class="panel-title">Activity Log</div>
             <div class="panel-body" id="log"></div>
