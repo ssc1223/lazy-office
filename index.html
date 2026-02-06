@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lazy Office — OpenClaw Agents</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="left">
+          <span class="pill live"><span class="dot"></span> LIVE</span>
+          <span class="crumb">主辦公室</span>
+          <span class="sep">·</span>
+          <span class="crumb">安全</span>
+        </div>
+        <div class="center">
+          <span class="title">偷懶辦公室 — Lazy Office</span>
+        </div>
+        <div class="right">
+          <span class="pill money">已省下 NT$ <span id="saved">3,581</span></span>
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="stage" aria-label="office scene">
+          <!--
+            SVG is a *placeholder* isometric room.
+            Replace with your own artwork later (PNG/SVG), keeping the agent overlay.
+          -->
+          <div class="scene" id="scene">
+            <svg class="room" viewBox="0 0 900 500" role="img" aria-label="isometric room">
+              <defs>
+                <linearGradient id="floor" x1="0" x2="1">
+                  <stop offset="0" stop-color="#c98f61" />
+                  <stop offset="1" stop-color="#b77a4f" />
+                </linearGradient>
+                <linearGradient id="wall" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0" stop-color="#f3e6d4" />
+                  <stop offset="1" stop-color="#ead7c0" />
+                </linearGradient>
+              </defs>
+
+              <!-- floor -->
+              <polygon points="120,360 450,470 780,360 450,250" fill="url(#floor)" />
+              <!-- walls -->
+              <polygon points="120,120 450,230 450,250 120,140" fill="url(#wall)" />
+              <polygon points="780,120 450,230 450,250 780,140" fill="#e6d0b7" />
+
+              <!-- rugs -->
+              <polygon points="200,340 370,410 520,360 350,295" fill="#8db7a1" opacity="0.9" />
+              <polygon points="520,300 650,345 750,305 620,260" fill="#97c7ac" opacity="0.9" />
+
+              <!-- simple furniture blocks -->
+              <g opacity="0.95">
+                <!-- left desk -->
+                <polygon points="230,330 280,350 320,330 270,310" fill="#caa06a" />
+                <polygon points="230,300 230,330 270,350 270,320" fill="#b48655" />
+                <polygon points="270,320 270,350 320,330 320,300" fill="#a77444" />
+
+                <!-- right sofa -->
+                <polygon points="610,340 660,360 720,330 670,310" fill="#d6d4c7" />
+                <polygon points="610,315 610,340 660,360 660,335" fill="#c8c5b6" />
+                <polygon points="660,335 660,360 720,330 720,305" fill="#bdb9ab" />
+
+                <!-- sign -->
+                <polygon points="650,170 720,200 720,240 650,210" fill="#b97b50" />
+                <text x="662" y="210" font-family="ui-monospace, SFMono-Regular" font-size="20" fill="#fff" transform="skewY(12)">
+                  LAZY
+                </text>
+                <text x="655" y="235" font-family="ui-monospace, SFMono-Regular" font-size="20" fill="#fff" transform="skewY(12)">
+                  OFFICE
+                </text>
+              </g>
+            </svg>
+
+            <div class="agent-layer" id="agentLayer" aria-label="agents"></div>
+          </div>
+        </section>
+
+        <aside class="side">
+          <div class="panel">
+            <div class="panel-title">屬性面板</div>
+            <div class="panel-body" id="panelBody">
+              <div class="hint">點選場景中的 agent 查看狀態</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">Command</div>
+            <div class="panel-body">
+              <div class="hint" style="margin-bottom:10px">
+                連線到你的 Lazy Office Server（本機/遠端）後，才能真的派工。
+              </div>
+              <label class="field">
+                <div class="label">API Base URL</div>
+                <input id="apiBase" placeholder="https://your-domain.example (or http://127.0.0.1:8787)" />
+              </label>
+              <div class="row">
+                <button class="btn" id="saveApi">Save</button>
+                <button class="btn ghost" id="testApi">Test</button>
+              </div>
+              <label class="field" style="margin-top:10px">
+                <div class="label">指令（會送給選取的 agent）</div>
+                <textarea id="cmdText" rows="4" placeholder="例如：幫我整理今天 AI 新聞 10 則（繁中）"></textarea>
+              </label>
+              <div class="row">
+                <button class="btn primary" id="sendCmd">Send</button>
+              </div>
+              <div class="hint" id="cmdHint" style="margin-top:10px"></div>
+            </div>
+          </div>
+
+          <div class="panel log">
+            <div class="panel-title">Activity Log</div>
+            <div class="panel-body" id="log"></div>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
